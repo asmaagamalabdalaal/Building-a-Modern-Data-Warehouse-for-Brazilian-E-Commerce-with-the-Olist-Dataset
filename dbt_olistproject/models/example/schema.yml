@@ -1,0 +1,14 @@
+
+version: 2
+
+sources:
+  - name: BRONZE
+    database: OLIST_DWH
+    schema: BRONZE
+    tables:
+      - name: olist_customers
+      - name: olist_orders
+      - name: olist_order_items
+      - name: olist_products
+      - name: olist_sellers
+

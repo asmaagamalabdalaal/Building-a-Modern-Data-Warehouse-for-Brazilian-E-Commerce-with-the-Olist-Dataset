@@ -1,0 +1,77 @@
+# Apache Airflow with Docker
+
+This project contains a Docker Compose setup for running Apache Airflow 2.7.1.
+
+## Prerequisites
+
+- Docker and Docker Compose installed on your system
+- At least 4GB of RAM allocated to Docker
+
+## Directory Structure
+
+The project creates the following directory structure:
+
+```
+.
+├── dags/            # Put your DAG files here
+├── logs/            # Airflow logs
+├── plugins/         # Custom Airflow plugins
+├── .env            # Environment variables
+└── docker-compose.yaml
+```
+
+## Getting Started
+
+1. Create the necessary directories:
+```bash
+mkdir -p ./dags ./logs ./plugins
+```
+
+2. Initialize the environment:
+```bash
+docker compose up airflow-init
+```
+
+3. Start all services:
+```bash
+docker compose up -d
+```
+
+4. Access the Airflow web interface:
+   - URL: http://localhost:8080
+   - Username: airflow
+   - Password: airflow
+
+## Services
+
+The following services will be created:
+- Airflow Webserver (Port 8080)
+- Airflow Scheduler
+- Airflow Worker
+- Airflow Triggerer
+- PostgreSQL (Database)
+- Redis (Message Broker)
+
+## Stopping the Services
+
+To stop all services:
+```bash
+docker compose down
+```
+
+To stop and delete volumes (this will delete all data):
+```bash
+docker compose down --volumes
+```
+
+## Adding Custom DAGs
+
+Place your DAG files in the `dags` directory. They will be automatically picked up by Airflow.
+
+## Environment Variables
+
+The main environment variables are set in the `.env` file:
+- `AIRFLOW_UID`: Set to 50000 (for Linux/macOS compatibility)
+- `AIRFLOW_GID`: Set to 0
+- `_AIRFLOW_WWW_USER_USERNAME`: Default admin username
+- `_AIRFLOW_WWW_USER_PASSWORD`: Default admin password

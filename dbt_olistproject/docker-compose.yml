@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  airflow-init:
+    image: apache/airflow:2.10.2
+    depends_on:
+      - postgres
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
+    entrypoint: >
+      bash -c "airflow db init &&
+               airflow users create --username admin --password admin --firstname admin --lastname admin --role Admin --email admin@example.com"
+    restart: "no"
+
+  airflow-webserver:
+    image: apache/airflow:2.10.2
+    depends_on:
+      - postgres
+      - airflow-init
+    ports:
+      - "8085:8080"
+    volumes:
+      - ./dags:/opt/airflow/dags
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
+    command: webserver
+
+  airflow-scheduler:
+    image: apache/airflow:2.10.2
+    volumes:
+      - ./dags:/opt/airflow/dags
+    depends_on:
+      - airflow-webserver
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
+    command: scheduler
+
+  dbt:
+    build: .
+    volumes:
+      - ./olistproject:/usr/app
+      - ~/.dbt:/root/.dbt
+    working_dir: /usr/app
+    command: tail -f /dev/null  
+
+volumes:
+  postgres_data:
+
+

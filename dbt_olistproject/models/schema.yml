@@ -1,0 +1,57 @@
+version: 2
+
+sources:
+  - name: BRONZE
+    database: "{{ env_var('SNOWFLAKE_DATABASE') }}"
+    schema: BRONZE
+    tables:
+      - name: olist_customers
+      - name: olist_orders
+      - name: olist_order_items
+      - name: olist_products
+      - name: olist_sellers
+
+models:
+  - name: customers
+    description: "Cleaned customer data"
+    columns:
+      - name: customer_id
+        tests:
+          - unique
+          - not_null
+      - name: customer_unique_id
+        tests:
+          - not_null
+      - name: customer_state
+        tests:
+          - not_null
+
+  - name: orders
+    description: "Cleaned order data"
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('customers')
+              field: customer_id
+
+  - name: order_items
+    description: "Cleaned order items data"
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('orders')
+              field: order_id
+      - name: product_id
+        tests:
+          - not_null
+      - name: seller_id
+        tests:
+          - not_null

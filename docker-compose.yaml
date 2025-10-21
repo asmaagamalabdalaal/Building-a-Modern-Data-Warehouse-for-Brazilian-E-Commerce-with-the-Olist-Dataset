@@ -1,0 +1,95 @@
+# Basic Airflow cluster configuration for LocalExecutor with PostgreSQL
+---
+version: '3'
+services:
+    postgres:
+        image: postgres:13
+        environment:
+            POSTGRES_USER: airflow
+            POSTGRES_PASSWORD: airflow
+            POSTGRES_DB: airflow
+        volumes:
+            - postgres-db-volume:/var/lib/postgresql/data
+        healthcheck:
+            test: ["CMD", "pg_isready", "-U", "airflow"]
+            interval: 10s
+            retries: 5
+            start_period: 5s
+        restart: always
+
+    scheduler:
+        image: apache/airflow:2.7.1
+        depends_on:
+            postgres:
+                condition: service_healthy
+        env_file: 
+            - .env
+        volumes:
+            - ./dags:/opt/airflow/dags
+            - ./logs:/opt/airflow/logs
+            - ./plugins:/opt/airflow/plugins
+        command: scheduler
+        healthcheck:
+            test: ["CMD", "curl", "--fail", "http://localhost:8974/health"]
+            interval: 30s
+            timeout: 10s
+            retries: 5
+            start_period: 30s
+        restart: always
+        environment:
+            AIRFLOW__CORE__EXECUTOR: LocalExecutor
+            AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
+            AIRFLOW__CORE__LOAD_EXAMPLES: 'true'
+            AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
+
+    webserver:
+        image: apache/airflow:2.7.1
+        depends_on:
+            postgres:
+                condition: service_healthy
+        env_file:
+            - .env
+        volumes:
+            - ./dags:/opt/airflow/dags
+            - ./logs:/opt/airflow/logs
+            - ./plugins:/opt/airflow/plugins
+        command: webserver
+        ports:
+            - "8080:8080"
+        healthcheck:
+            test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
+            interval: 30s
+            timeout: 10s
+            retries: 5
+            start_period: 30s
+        restart: always
+        environment:
+            AIRFLOW__CORE__EXECUTOR: LocalExecutor
+            AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
+            AIRFLOW__CORE__LOAD_EXAMPLES: 'true'
+            AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
+
+    init:
+        image: apache/airflow:2.7.1
+        depends_on:
+            postgres:
+                condition: service_healthy
+        env_file:
+            - .env
+        volumes:
+            - ./dags:/opt/airflow/dags
+            - ./logs:/opt/airflow/logs
+            - ./plugins:/opt/airflow/plugins
+        command: db init
+        environment:
+            AIRFLOW__CORE__EXECUTOR: LocalExecutor
+            AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
+            AIRFLOW__CORE__LOAD_EXAMPLES: 'true'
+            AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
+            _AIRFLOW_DB_UPGRADE: 'true'
+            _AIRFLOW_WWW_USER_CREATE: 'true'
+            _AIRFLOW_WWW_USER_USERNAME: ${_AIRFLOW_WWW_USER_USERNAME:-airflow}
+            _AIRFLOW_WWW_USER_PASSWORD: ${_AIRFLOW_WWW_USER_PASSWORD:-airflow}
+
+volumes:
+    postgres-db-volume:
