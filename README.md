@@ -163,11 +163,11 @@ The Power BI dashboard connects directly to the **Snowflake Gold layer** and pro
 
 > 📁 Dashboard file: [`Powerbi Dashboard/`](Powerbi%20Dashboard/)
 
-![Power BI Dashboard](Annotation 2025-10-04 201400.png)
-![Power BI Dashboard](Annotation 2025-10-04 201442.png)
-![Power BI Dashboard](Annotation 2025-10-04 201601.png)
-![Power BI Dashboard](Annotation 2025-10-04 201743.png)
-![Power BI Dashboard](Annotation 2025-10-08 150758.png)
+![Power BI Dashboard](https://github.com/asmaagamalabdalaal/Building-a-Modern-Data-Warehouse-for-Brazilian-E-Commerce-with-the-Olist-Dataset/blob/3cdd40fadec940efba306a308395df956a0e8f37/Powerbi%20Dashboard/Annotation%202025-10-04%20201400.png)
+![Power BI Dashboard](https://github.com/asmaagamalabdalaal/Building-a-Modern-Data-Warehouse-for-Brazilian-E-Commerce-with-the-Olist-Dataset/blob/3cdd40fadec940efba306a308395df956a0e8f37/Powerbi%20Dashboard/Annotation%202025-10-04%20201442.png)
+![Power BI Dashboard](https://github.com/asmaagamalabdalaal/Building-a-Modern-Data-Warehouse-for-Brazilian-E-Commerce-with-the-Olist-Dataset/blob/3cdd40fadec940efba306a308395df956a0e8f37/Powerbi%20Dashboard/Annotation%202025-10-04%20201601.png)
+![Power BI Dashboard](https://github.com/asmaagamalabdalaal/Building-a-Modern-Data-Warehouse-for-Brazilian-E-Commerce-with-the-Olist-Dataset/blob/3cdd40fadec940efba306a308395df956a0e8f37/Powerbi%20Dashboard/Annotation%202025-10-04%20201743.png)
+![Power BI Dashboard](https://github.com/asmaagamalabdalaal/Building-a-Modern-Data-Warehouse-for-Brazilian-E-Commerce-with-the-Olist-Dataset/blob/3cdd40fadec940efba306a308395df956a0e8f37/Powerbi%20Dashboard/Annotation%202025-10-08%20150758.png)
 **Key report pages include:**
 
 - **Sales Overview** — Total revenue, order volume, average order value, and growth trends
