@@ -163,8 +163,11 @@ The Power BI dashboard connects directly to the **Snowflake Gold layer** and pro
 
 > 📁 Dashboard file: [`Powerbi Dashboard/`](Powerbi%20Dashboard/)
 
-![Power BI Dashboard](Powerbi%20Dashboard/dashboard.png)
-
+![Power BI Dashboard](Annotation 2025-10-04 201400.png)
+![Power BI Dashboard](Annotation 2025-10-04 201442.png)
+![Power BI Dashboard](Annotation 2025-10-04 201601.png)
+![Power BI Dashboard](Annotation 2025-10-04 201743.png)
+![Power BI Dashboard](Annotation 2025-10-08 150758.png)
 **Key report pages include:**
 
 - **Sales Overview** — Total revenue, order volume, average order value, and growth trends
@@ -180,6 +183,11 @@ The Power BI dashboard connects directly to the **Snowflake Gold layer** and pro
 dbt auto-generates interactive data lineage graphs and model documentation, covering column-level metadata, test coverage reports, and the full Bronze → Silver → Gold lineage.
 
 > 📁 dbt docs: [`dbt docs/`](dbt%20docs/)
+![dbt docs](agg_sales_by_day G.png)
+![dbt docs](customers.png)
+![dbt docs](fact_orders.png)
+![dbt docs](products.png)
+![dbt docs](sellers.png)
 
 ---
 
