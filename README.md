@@ -183,11 +183,11 @@ The Power BI dashboard connects directly to the **Snowflake Gold layer** and pro
 dbt auto-generates interactive data lineage graphs and model documentation, covering column-level metadata, test coverage reports, and the full Bronze → Silver → Gold lineage.
 
 > 📁 dbt docs: [`dbt docs/`](dbt%20docs/)
-![dbt docs](agg_sales_by_day G.png)
-![dbt docs](customers.png)
-![dbt docs](fact_orders.png)
-![dbt docs](products.png)
-![dbt docs](sellers.png)
+![dbt docs](https://github.com/asmaagamalabdalaal/Building-a-Modern-Data-Warehouse-for-Brazilian-E-Commerce-with-the-Olist-Dataset/blob/ea1dfe7a2b71c5f594796a85209be13e34bfec7d/dbt%20docs/customers.png)
+![dbt docs](https://github.com/asmaagamalabdalaal/Building-a-Modern-Data-Warehouse-for-Brazilian-E-Commerce-with-the-Olist-Dataset/blob/ea1dfe7a2b71c5f594796a85209be13e34bfec7d/dbt%20docs/fact_orders.png)
+![dbt docs](https://github.com/asmaagamalabdalaal/Building-a-Modern-Data-Warehouse-for-Brazilian-E-Commerce-with-the-Olist-Dataset/blob/ea1dfe7a2b71c5f594796a85209be13e34bfec7d/dbt%20docs/products.png)
+![dbt docs](https://github.com/asmaagamalabdalaal/Building-a-Modern-Data-Warehouse-for-Brazilian-E-Commerce-with-the-Olist-Dataset/blob/ea1dfe7a2b71c5f594796a85209be13e34bfec7d/dbt%20docs/sellers.png)
+![dbt docs](https://github.com/asmaagamalabdalaal/Building-a-Modern-Data-Warehouse-for-Brazilian-E-Commerce-with-the-Olist-Dataset/blob/ea1dfe7a2b71c5f594796a85209be13e34bfec7d/dbt%20docs/agg_sales_by_day%20G.png)
 
 ---
 
